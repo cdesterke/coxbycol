@@ -16,7 +16,7 @@ plothr<-function(df){
 			if(!require(pals)){
     	install.packages("pals")
     	library(pals)}
-		df$logHR= log(HR,10)
+		df$logHR= log(df$HR,10)
 	
 		## perform the barplot
 		p=ggplot(data=df,aes(x=reorder(identifiers,logHR),y=NLP,fill=significance))+geom_bar(stat="identity")+
