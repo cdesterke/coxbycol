@@ -15,3 +15,12 @@ head(df)
 
 
 ![res](https://github.com/cdesterke/coxbycol/blob/main/results.png)
+
+### graph output
+```r
+library(patchwork)
+p1<-plotbeta(df,nb=5,title="",size=16)
+p2<-plotnlphr(df,nb=5,title="",size=16)
+p1+p2
+```
+![plot](https://github.com/cdesterke/coxbycol/blob/main/patchwork.png)
