@@ -13,13 +13,16 @@ plothr<-function(df){
 		  	if(!require(ggplot2)){
     	install.packages("ggplot2")
     	library(ggplot2)}
-
+			if(!require(ggplot2)){
+    	install.packages("dplyr")
+    	library(dplyr)}
 			if(!require(pals)){
     	install.packages("pals")
     	library(pals)}
 
+	
 		## perform the barplot
-		p=ggplot(data=df,aes(x=reorder(identifier,beta.score),y=NLP,fill=family))+geom_bar(stat="identity")+
+		p=ggplot(data=df,aes(x=reorder(identifier,HR),y=NLP,fill=identifier))+geom_bar(stat="identity")+
 			ylim(0,max(res$NLP)+(max(res$NLP)/5))+
 			coord_flip()+
 			theme_minimal()+
