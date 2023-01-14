@@ -20,7 +20,7 @@ load(file="cancer.rda")
 ls()
 
 
-coxbycol(cancer$OS.TIME ,cancer$OS.STATUS ,data)
+df<-coxbycol(cancer$OS.TIME ,cancer$OS.STATUS ,data)
 
 
 coxbycol<-function(time,event,data){
@@ -29,6 +29,9 @@ suppressWarnings({
 	if(!require(survival)){
     		install.packages("survival")
     		library(survival)}
+	if(!require(dplyr)){
+    		install.packages("dplyr")
+    		library(dplyr)}		
 
 	## define survival formula
 		os<-Surv(time,event)
@@ -55,9 +58,15 @@ suppressWarnings({
 
 	## compute adjusted pvalues
 		df$adjpvals<-p.adjust(df$pvalues,method="fdr")
+		
+	
+		## compute NLP
+		df$NLP= -log(df$pvalues,10)
+		## compute significance
+		df%>%mutate(significance=ifelse(pvalues<=0.05,"YES","no"))->df
 	
 	## retun dataframe
-		df
+	return(df)
 	})
 }
 ##################
