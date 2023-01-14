@@ -13,24 +13,21 @@ plothr<-function(df){
 		  	if(!require(ggplot2)){
     	install.packages("ggplot2")
     	library(ggplot2)}
-			if(!require(ggplot2)){
-    	install.packages("dplyr")
-    	library(dplyr)}
 			if(!require(pals)){
     	install.packages("pals")
     	library(pals)}
-
+		df$logHR= log(HR,10)
 	
 		## perform the barplot
-		p=ggplot(data=df,aes(x=reorder(identifier,HR),y=NLP,fill=identifier))+geom_bar(stat="identity")+
-			ylim(0,max(res$NLP)+(max(res$NLP)/5))+
+		p=ggplot(data=df,aes(x=reorder(identifiers,logHR),y=NLP,fill=significance))+geom_bar(stat="identity")+
+			ylim(0,max(df$logHR)+(max(df$logHR)/5))+
 			coord_flip()+
 			theme_minimal()+
-			xlab("Combinatorial TF")+
-			ylab("Negative log10 of p-values")+
+			xlab("Covariates")+
+			ylab("Log10 hazard ratios")+
 			scale_fill_manual(values=cols25())+
-			geom_text(aes(label=round(NLP,2)),hjust=0, vjust=0.5,color="navy",position= position_dodge(0),size=5,angle=0)+
-			ggtitle("") +theme(text = element_text(size = 16))+theme(legend.position="none")
+			geom_text(aes(label=round(HR,2)),hjust=0, vjust=0.5,color="navy",position= position_dodge(0),size=5,angle=0)+
+			ggtitle("") +theme(text = element_text(size = 16))+theme(legend.position="bottom")
 
 		return(p)
 }
