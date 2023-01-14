@@ -5,6 +5,10 @@ loop cox on columns of a dataframe
 ### compute analyses
 ```r
 ##load functions from R files and data
+source("script.R")
+source("plotbeta.R")
+source("plotnlpr.R")
+
 load(file="cancer.rda")
 ls()
 
