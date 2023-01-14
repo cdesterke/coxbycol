@@ -5,8 +5,17 @@ ls()
 
 cancer%>%select(3:7)->data
 df<-coxbycol(cancer$OS.TIME ,cancer$OS.STATUS ,data)
-plotnlpbeta(df,5,"",16)
+plotnlpbeta(df,5,"",16)#####END
 
+
+### add a zero.effect row to see grey
+library(dplyr)
+df %>% add_row(identifiers = "new", coef.beta = 2,HR=1,pvalues=0.001,adjpvals=1.00,NLP=3,significance="no",prognosis="zero.effect")->df
+
+plotnlpbeta(df,6,"",16)
+df <-df[1:5,]#####END
+
+#### function
 plotnlpbeta<-function(df,nb=10,title="Univariate Cox analysis",size=18){
 
 		## load necessary packages
@@ -24,10 +33,11 @@ plotnlpbeta<-function(df,nb=10,title="Univariate Cox analysis",size=18){
 			theme_minimal()+
 			xlab("Covariates")+
 			ylab("-log10 p-values Cox / (beta coef.)")+
-			scale_fill_manual(values=c("lightskyblue1","plum2","grey"))+
+			scale_fill_manual(values=c("lightskyblue1","plum2","grey90"))+
 			geom_hline(yintercept= -log(0.05,10), linetype="dashed", color = "red")+
 			geom_text(aes(label=round(coef.beta,5)),hjust=0, vjust=0.5,color="navy",position= position_dodge(0),size=5,angle=0)+
 			ggtitle(title) +theme(text = element_text(size = size))+theme(legend.position="bottom")
 
 		return(p)
 }
+######
