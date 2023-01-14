@@ -7,7 +7,7 @@ loop cox on columns of a dataframe
 ##load functions from R files and data
 source("script.R")
 source("plotbeta.R")
-source("plotnlpr.R")
+source("plotnlphr.R")
 
 load(file="cancer.rda")
 ls()
