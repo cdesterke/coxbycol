@@ -12,17 +12,19 @@ cancer%>%dplyr::rename(response="response.category")->cancer
 
 save(cancer,file="cancer.rda")
 rm(list=ls())
-######
+######END data prepare
 
 #####script
 
 load(file="cancer.rda")
 ls()
-
-
+library(dplyr)
+cancer%>%select(3:7)->data
 df<-coxbycol(cancer$OS.TIME ,cancer$OS.STATUS ,data)
+####END script
 
 
+###funtion
 coxbycol<-function(time,event,data){
 suppressWarnings({
 	## install survival needed package if necessary
