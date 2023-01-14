@@ -69,7 +69,7 @@ suppressWarnings({
 		## compute prognosis
 		df%>%mutate(prognosis=case_when(HR==1~"noeffect",
 						HR>1~"unfavorable",
-						HR<1~"favorable"))
+						HR<1~"favorable"))->df
 	
 	## retun dataframe
 	return(df)
