@@ -34,7 +34,7 @@ plotnlpbeta<-function(df,nb=10,title="Univariate Cox analysis",size=18){
 			xlab("Covariates")+
 			ylab("-log10 p-values Cox / (beta coef.)")+
 			scale_fill_manual(values=c("lightskyblue1","plum2","grey90"))+
-			geom_hline(yintercept= -log(0.05,10), linetype="dashed", color = "red")+
+			geom_hline(yintercept= -log(0.05,10), linetype="dashed", color = "tomato",size=1)+
 			geom_text(aes(label=round(coef.beta,5)),hjust=0, vjust=0.5,color="navy",position= position_dodge(0),size=5,angle=0)+
 			ggtitle(title) +theme(text = element_text(size = size))+theme(legend.position="bottom")
 
