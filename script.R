@@ -66,6 +66,10 @@ suppressWarnings({
 		df$NLP= -log(df$pvalues,10)
 		## compute significance
 		df%>%mutate(significance=ifelse(pvalues<=0.05,"YES","no"))->df
+		## compute prognosis
+		df%>%mutate(prognosis=case_when(HR==1~"noeffect",
+						HR>1~"unfavorable",
+						HR<1~"favorable"))
 	
 	## retun dataframe
 	return(df)
