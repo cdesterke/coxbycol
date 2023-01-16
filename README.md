@@ -11,7 +11,7 @@ source("plotnlphr.R")
 
 load(file="cancer.rda")
 ls()
-
+library(dplyr)
 cancer%>%select(3:7)->data
 df<-coxbycol(cancer$OS.TIME ,cancer$OS.STATUS ,data)
 head(df)
